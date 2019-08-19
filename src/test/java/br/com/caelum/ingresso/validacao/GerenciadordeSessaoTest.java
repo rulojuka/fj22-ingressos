@@ -1,14 +1,11 @@
 package br.com.caelum.ingresso.validacao;
 
 import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
 
 import java.time.Duration;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collection;
-import java.util.Collections;
 import java.util.List;
 
 import org.junit.Before;
@@ -35,7 +32,7 @@ public class GerenciadordeSessaoTest {
 	
 	@Test
 	public void naoDeveCaberQuandoASessaoComecaEmUmDiaETerminaNoOutro() {
-		GerenciadordeSessao gerenciadordeSessao = new GerenciadordeSessao(Arrays.asList(sessao));
+		GerenciadorDeSessao gerenciadordeSessao = new GerenciadorDeSessao(Arrays.asList(sessao));
 		
 		boolean cabe = gerenciadordeSessao.cabe(sessao);
 
@@ -45,6 +42,6 @@ public class GerenciadordeSessaoTest {
 	@Test
 	public void deveCaberQuandoAListaEstiverVazia() {
 		List<Sessao> listaVazia = new ArrayList<Sessao>();
-		new GerenciadordeSessao(listaVazia);
+		new GerenciadorDeSessao(listaVazia);
 	}
 }
