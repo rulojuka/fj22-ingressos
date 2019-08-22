@@ -44,5 +44,9 @@ public class Compra {
 	public void setIngressos(List<Ingresso> ingressos) {
 		this.ingressos = ingressos;
 	}
+	
+	public void add(Ingresso ingresso) {
+		ingressos.add(ingresso);
+	}
 
 }

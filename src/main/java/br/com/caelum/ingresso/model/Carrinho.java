@@ -37,7 +37,9 @@ public class Carrinho {
 	}
 
 	public Compra toCompra() {
-		return new Compra(ingressos);
+		Compra compra = new Compra();
+		this.ingressos.forEach(compra::add);
+		return compra;
 	}
 
 }
