@@ -1,3 +1,8 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+         pageEncoding="UTF-8" %>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
+<%@ taglib tagdir="/WEB-INF/tags/" prefix="ingresso" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <ingresso:template>
 	<jsp:body>
 		<form action="/usuario/cadastrar" method="post">
@@ -15,7 +20,7 @@
 			</div>
 
 			<div class="form-group">
-				<label for="confirmPassword">Senha:</label>
+				<label for="confirmPassword">Confirme sua senha:</label>
 				<input id="confirmPassword" type="password" name="confirmPassword"
 					class="form-control">
 			</div>

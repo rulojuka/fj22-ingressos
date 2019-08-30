@@ -5,6 +5,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -36,8 +37,10 @@ public class UsuarioController {
 	}
 
 	@PostMapping("/usuario/request")
+	@Transactional
 	public ModelAndView solicitacaoDeAcesso(String email) {
 		ModelAndView modelAndView = new ModelAndView("usuario/adicionado");
+		modelAndView.addObject("email",email);
 		Token token = tokenHelper.generateFrom(email);
 		mailer.send(new EmailNovoUsuario(token));
 		return modelAndView;
@@ -59,7 +62,8 @@ public class UsuarioController {
 		return modelAndView;
 	}
 
-	@PostMapping("/usario/cadastrar")
+	@PostMapping("/usuario/cadastrar")
+	@Transactional
 	public ModelAndView cadastrar(ConfirmacaoLoginForm form) {
 		ModelAndView modelAndView = new ModelAndView("redirect:/login");
 		if (form.isValid()) {
