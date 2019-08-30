@@ -8,6 +8,8 @@ import org.springframework.security.core.GrantedAuthority;
 @SuppressWarnings("serial")
 @Entity
 public class Permissao implements GrantedAuthority {
+	
+	public static final Permissao COMPRADOR = new Permissao("COMPRADOR");
 
 	@Id
 	private String nome;
