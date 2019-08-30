@@ -1,6 +1,14 @@
 package br.com.caelum.ingresso.model.form;
 
+import java.util.HashSet;
+import java.util.Set;
+
+import org.springframework.security.crypto.password.PasswordEncoder;
+
+import br.com.caelum.ingresso.dao.UsuarioDao;
 import br.com.caelum.ingresso.mail.Token;
+import br.com.caelum.ingresso.model.Permissao;
+import br.com.caelum.ingresso.model.Usuario;
 
 public class ConfirmacaoLoginForm {
 	private Token token;
@@ -16,6 +24,21 @@ public class ConfirmacaoLoginForm {
 
 	public boolean isValid() {
 		return password.equals(confirmPassword);
+	}
+
+	public Usuario toUsuario(UsuarioDao dao, PasswordEncoder encoder) {
+		String encryptedPassword = encoder.encode(this.password);
+		String email = token.getEmail();
+		Usuario usuario = dao.findByEmail(email).orElse(novoUsuario(email, encryptedPassword));
+		usuario.setPassword(encryptedPassword);
+		return usuario;
+	}
+
+	private Usuario novoUsuario(String email, String encryptedPassword) {
+		Set<Permissao> permissoes = new HashSet<>();
+		permissoes.add(Permissao.COMPRADOR);
+
+		return new Usuario(email, password, permissoes);
 	}
 
 	public Token getToken() {
